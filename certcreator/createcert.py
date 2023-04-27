@@ -1,3 +1,5 @@
+# Creates let's encrypt TLS certificate using DNS challenge and uploads the certificates to an S3 bucket.
+
 import boto3
 import certbot.main
 import os
@@ -28,5 +30,5 @@ def create_certificate(domain_name, bucket_name, key_name):
     with open(temp_dir + '/live/' + domain_name + '/fullchain.pem', 'rb') as f:
         s3.upload_fileobj(f, bucket_name, key_name + '/fullchain.pem')
 
-# Example usage
+# Example usage (adjust domain name, name of the S3 bucket and name of key in the S3 bucket)
 create_certificate('testdomain.net', 'certificates_bucket', 'mycerts')
